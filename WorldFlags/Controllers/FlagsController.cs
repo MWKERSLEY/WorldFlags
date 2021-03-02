@@ -21,7 +21,7 @@ namespace WorldFlags.Controllers
         public JsonFileFlagService FlagService { get; }
 
         [HttpGet]
-        public World Get()
+        public List<Country> Get()
         {
             return FlagService.GetCountries().Countries;
         }
