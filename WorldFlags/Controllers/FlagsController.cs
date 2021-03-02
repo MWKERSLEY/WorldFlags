@@ -23,7 +23,7 @@ namespace WorldFlags.Controllers
         [HttpGet]
         public World Get()
         {
-            return FlagService.GetCountries();
+            return FlagService.GetCountries().Countries;
         }
     }
 }
