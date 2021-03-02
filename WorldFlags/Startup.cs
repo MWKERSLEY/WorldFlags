@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,10 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using WorldFlags.Models;
+using WorldFlags.Services;
 
 namespace WorldFlags
 {
@@ -24,6 +28,8 @@ namespace WorldFlags
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllers();
+            services.AddTransient<JsonFileFlagService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +56,13 @@ namespace WorldFlags
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                //endpoints.MapGet("/flags", (context) =>
+                //{
+                //    var flags = app.ApplicationServices.GetService<JsonFileFlagService>().GetCountries();
+                //    var json = JsonSerializer.Serialize<IEnumerable<Country>>(flags);
+                //    return context.Response.WriteAsync(json);
+                //});
             });
         }
     }

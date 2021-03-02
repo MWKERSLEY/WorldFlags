@@ -1,10 +1,51 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Fun With Flags";
 }
+@*myflagbase.com*@
+@*Outer boundary*@
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+
+
+
+
+@foreach (var country in Model.Countries)
+{
+	@*<div class="card flag col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" style="background-image: url('@country.Flag');" id="@country.Alpha2Code">
+			<div class="flag-inner"></div>
+		</div>*@
+
+	<div class="flip-box card flag col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" id="@country.Alpha2Code">
+		<div class="flip-box-inner flag-inner">
+			<div class="flip-box-front" style="background-image: url('@country.Flag');"></div>
+			<div class="flip-box-back" style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('@country.Flag');">
+				<div class="flip-box-back-inner">
+					<div class="name">@country.Name</div>
+					<div class="details">
+						@if (!String.IsNullOrEmpty(country.Capital))
+						{
+							@:Capital: @country.Capital<br />
+						}
+						@country.Region
+						@if (!String.IsNullOrEmpty(country.Subregion))
+						{
+							@: - @country.Subregion
+						}
+						<br />
+						@if (country.RegionalBlocs.Count > 0)
+						{
+							@:Member of:
+							@foreach (var block in country.RegionalBlocs)
+							{
+								@block.Name<br />
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
