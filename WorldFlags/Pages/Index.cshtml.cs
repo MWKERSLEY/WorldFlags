@@ -29,7 +29,7 @@ namespace WorldFlags.Pages
             Countries = world.Countries;
             if (world.Date != DateTime.Now.Date)
             {
-                Debug.WriteLine("test");
+                //Debug.WriteLine("test");
                 FlagService.UpdateData();
             }
         }
